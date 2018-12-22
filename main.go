@@ -192,25 +192,8 @@ func calcrateMaxWidthAndHeight(aa []*Aa, fontSize float64, lineHeight float64) (
 }
 
 func ConvertTextToImage(lines []string, sWidth int, sHeight int) (image.Image, error) {
-	// 対象アスキーアートの縦横を図る
-	measure := gg.NewContext(S, S)
-	if err := measure.LoadFontFace("./Saitamaar.ttf", FONT_SIZE); err != nil {
-		return nil, err
-	}
-	maxWidth := 0.0
-	for _, line := range lines {
-		w, _ := measure.MeasureString(line)
-		if maxWidth <= w {
-			maxWidth = w
-		}
-	}
-
-	// 対象アスキーアートをpngに描画する
-	width := int(maxWidth) + 10
-	height := int(int(LINE_HEIGHT) * (len(lines) + 1))
-
-	width = sWidth
-	height = sHeight
+	width := sWidth
+	height := sHeight
 	dc := gg.NewContext(width, height)
 	if err := dc.LoadFontFace("./Saitamaar.ttf", FONT_SIZE); err != nil {
 		return nil, err
